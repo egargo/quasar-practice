@@ -33,15 +33,15 @@
     "@typescript-eslint/eslint-plugin": "^7.16.0",
     "@typescript-eslint/parser": "^7.16.0",
     "autoprefixer": "^10.4.2",
+    "cypress": "^13.6.6",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-cypress": "^2.15.1",
     "eslint-plugin-vue": "^9.0.0",
     "prettier": "^2.5.1",
     "typescript": "~5.5.4",
     "vite-plugin-checker": "^0.7.2",
-    "vue-tsc": "2.0.29",
-    "cypress": "^13.6.6",
-    "eslint-plugin-cypress": "^2.15.1"
+    "vue-tsc": "2.0.29"
   },
   "engines": {
     "node": "^20 || ^18 || ^16",
