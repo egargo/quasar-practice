@@ -5,11 +5,11 @@
 
 // This test will pass when run against a clean Quasar project
 
-describe('Login', () => {
+describe('Login and logout', () => {
   beforeEach(() => {
     cy.visit('/');
   });
-  it('Login', () => {
+  it('Should log in and log out', () => {
     cy.get('input[name=username]')
       .type('username');
 
@@ -18,7 +18,11 @@ describe('Login', () => {
 
     cy.get('button[name=login]')
       .click();
+
+    cy.get('button[name=logout]')
+      .click();
   })
+
 });
 
 
