@@ -3,7 +3,7 @@
     <q-header elevated>
       <q-toolbar>
         <q-toolbar-title>
-          Quasar App
+          CRUD App
         </q-toolbar-title>
       </q-toolbar>
     </q-header>
