@@ -1,7 +1,4 @@
-import { Cookies } from 'quasar';
 import { RouteRecordRaw } from 'vue-router';
-
-const authorizationToken: string = Cookies.get('Authorization');
 
 const routes: RouteRecordRaw[] = [
   {
@@ -16,13 +13,6 @@ const routes: RouteRecordRaw[] = [
       }
     ],
     meta: { hideForAuth: true },
-    beforeEnter: (to, _from, next) => {
-      if (authorizationToken) {
-        next({ name: 'me' });
-      } else {
-        next();
-      }
-    }
   },
 
   {
@@ -36,13 +26,6 @@ const routes: RouteRecordRaw[] = [
       }
     ],
     meta: { requiresAuth: true },
-    beforeEnter: (to, _form, next) => {
-      if (authorizationToken) {
-        next();
-      } else {
-        next({ name: 'login' });
-      }
-    }
   },
 
   // Always leave this as last one,
