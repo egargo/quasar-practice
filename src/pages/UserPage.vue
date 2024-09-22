@@ -1,7 +1,7 @@
 <template>
   <q-page class="column">
     <h1>Logged In</h1>
-    <q-btn unelevated color="primary" label="Logout" @click="logout" />
+    <q-btn name="logout" unelevated color="primary" label="Logout" @click="logout" />
   </q-page>
 </template>
 
