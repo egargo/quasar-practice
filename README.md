@@ -1,6 +1,6 @@
 # Quasar App (quasar-project)
 
-A Quasar Project + Cypress
+(Quasar + Cypress) Practice
 
 ## Install the dependencies
 ```bash
