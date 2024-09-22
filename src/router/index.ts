@@ -7,6 +7,7 @@ import {
 } from 'vue-router';
 
 import routes from './routes';
+import { Cookies } from 'quasar';
 // import { Cookies } from 'quasar';
 
 /*
@@ -33,32 +34,23 @@ export default route(function(/* { store, ssrContext } */) {
     history: createHistory(process.env.VUE_ROUTER_BASE),
   });
 
-  // const authorizationToken: string = Cookies.get('Authorization');
-  //
-  // Router.beforeEach((to, _from, next) => {
-  //   if (to.meta.requiresAuth) {
-  //     if (authorizationToken) {
-  //       next();
-  //     } else {
-  //       next({ name: 'login' });
-  //     }
-  //   } else {
-  //     next();
-  //   }
-  //
-  // });
-  //
-  // Router.beforeEach((to, _from, next) => {
-  //   if (to.meta.hideForAuth) {
-  //     if (authorizationToken) {
-  //       next({ name: 'me' });
-  //     } else {
-  //       next();
-  //     }
-  //   } else {
-  //     next();
-  //   }
-  // });
+
+  Router.beforeEach((to, _from, next) => {
+    const isLoggedIn: string = Cookies.get('Authorization');
+    const isAuth = to.matched.some(record => record.meta.requiresAuth);
+
+    if (isAuth && isLoggedIn) {
+      next();
+    } else if (!isAuth && !isLoggedIn) {
+      next();
+    } else {
+      if (to.name === 'me') {
+        next({ name: 'login' })
+      } else {
+        next({ name: 'me' });
+      }
+    }
+  });
 
   return Router;
 });
