@@ -2,40 +2,23 @@
 
 (Quasar + Cypress) Practice
 
-## Install the dependencies
+## Setup
 ```bash
+# Install dependencies
 yarn
-# or
-npm install
-```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
-```bash
+# Start the app in development mode (hot-code reloading, error reporting, etc.)
 quasar dev
-```
 
-
-### Lint the files
-```bash
+# Lint the files
 yarn lint
-# or
-npm run lint
-```
 
-
-### Format the files
-```bash
+# Format the files
 yarn format
-# or
-npm run format
-```
 
-
-
-### Build the app for production
-```bash
+# Build the app for production
 quasar build
-```
 
-### Customize the configuration
-See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
+# Run Cypress
+yarn cypress open
+```
