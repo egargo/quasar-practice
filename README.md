@@ -2,6 +2,7 @@
 
 (Quasar + Cypress) Practice
 
+
 ## Setup
 ```bash
 # Install dependencies
@@ -22,3 +23,8 @@ quasar build
 # Run Cypress
 yarn cypress open
 ```
+
+
+## Related projects
+
+- [Spring Boot Practice](https://github.com/egargo/spring-boot-practice)
