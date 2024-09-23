@@ -8,6 +8,7 @@ export const useAuthStore = defineStore('auth', {
     password: '',
     accessToken: '',
     refreshToken: '',
+    refreshTokenTimeout: 0,
   }),
 
   getters: {
@@ -16,9 +17,6 @@ export const useAuthStore = defineStore('auth', {
   },
 
   actions: {
-    checkLogin() {
-    },
-
     async login(username: string, password: string) {
       this.username = username;
       this.password = password;
@@ -34,6 +32,27 @@ export const useAuthStore = defineStore('auth', {
         Cookies.set('refreshToken', this.refreshToken, { expires: 1, secure: true });
 
         this.router.push({ name: 'me' });
+        this.startRefreshTokenTimer();
+      }).catch((error) => {
+        console.log(error);
+      });
+    },
+
+    async refresh() {
+      await api.post('/api/auth/refresh',
+        null,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + Cookies.get('Authorization'),
+            'refreshToken': Cookies.get('refreshToken'),
+          }
+        }
+      ).then((response) => {
+        this.accessToken = response.data.accessToken;
+        Cookies.set('Authorization', this.accessToken, { expires: '15m', secure: true });
+        console.log(this.accessToken);
+        this.startRefreshTokenTimer();
       }).catch((error) => {
         console.log(error);
       });
@@ -46,7 +65,20 @@ export const useAuthStore = defineStore('auth', {
       this.accessToken = '';
       this.refreshToken = '';
 
+      this.stopRefreshTokenTimer();
       this.router.push({ name: 'login' });
+    },
+
+    startRefreshTokenTimer() {
+      // 840000: 14 minutes
+      // 45000: 45 seconds
+      // 59000: 59 seconds
+      // 899000: 14 minutes and 59 seconds
+      this.refreshTokenTimeout = window.setTimeout(this.refresh, 899000);
+    },
+
+    stopRefreshTokenTimer() {
+      clearTimeout(this.refreshTokenTimeout);
     }
   }
 });
